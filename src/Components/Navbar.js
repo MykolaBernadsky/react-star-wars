@@ -1,22 +1,41 @@
 import React from "react";
-import { Menu, Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
+import styled from "styled-components";
 
+const Container = styled.div`
+  margin: 0 111px;
+  display: flex;
+`;
+const Menu = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
+const Links = styled.div`
+  font-size: 20px;
+  color: #fff;
+  padding: 20px;
+  border: 1px solid transparent;
+
+  &:hover {
+    border-bottom-color: #03a9f4;
+    color: #03a9f4;
+    transition: border-bottom-color 0.3s ease-in, color 0.3s ease-in;
+  }
+`;
 
 export default function Navbar() {
   return (
-    <Menu inverted style={{backgroundColor: 'transparent'}} >
+    <Menu>
       <Container>
         <Link to="/">
-          <Menu.Item name="star wars API" />
+          <Links>Home</Links>
         </Link>
         <Link to="/people">
-          <Menu.Item name="people" />
+          <Links>People</Links>{" "}
         </Link>
-        <Link to="/planets">
-          <Menu.Item name="planets" />
+        <Link to="/films">
+          <Links>Films</Links>{" "}
         </Link>
       </Container>
     </Menu>
