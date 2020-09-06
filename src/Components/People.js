@@ -1,42 +1,31 @@
-import React, {useCallback} from "react";
-import styled from "styled-components";
-import { Link } from 'react-router-dom';
- 
+import React, {  useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+
+import PersonListItem from './PersonListItem';
+
 const Container = styled.div`
-  margin-top: 50px;
-`;
-
-const Item = styled.div`
-  color: #ffb13a;
-  font-size: 25px;
-  padding: 25px;
-  text-align: center;
-  border: 2px solid transparent;
-
-  &:hover {
-    border-color: #ffb13a;
-    border-radius: 25px;
-    transition: border-color .35s ease-in-out;
-  }
+  margin-top: 10px;
 `;
 
 
-export default function People({ data }) {
-
-  function PersonListItem ({name, id}) {
-    return (
-      <Link to={`/${id}`} key={id}>
-        <Item>{name}</Item>
-      </Link>
-    );
-  }
-
-  const toPerson = useCallback((person, index) =>  <PersonListItem name={person.name} index={index + 1}/>)
 
 
-  return (
-    <Container>
-      {data.map(toPerson)}
-    </Container>
-  );
+export default function People() {
+  const [people, setPeople] = useState([]);
+  
+
+  useEffect(() => {
+    axios.get("https://swapi.dev/api/people/")
+      .then(res => {
+        console.log(res.data.results);
+        setPeople(res.data.results);
+      });
+  }, [setPeople]);
+
+  const toPerson = useCallback((person, index) => <PersonListItem name={person.name} id={index + 1} />);
+  
+
+
+  return <Container>{people.map(toPerson)}</Container>
 }

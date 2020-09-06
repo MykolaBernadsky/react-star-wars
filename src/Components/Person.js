@@ -1,32 +1,62 @@
-import React, {useState, useEffect} from 'react'
-import {Link, useParams} from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import styled from "styled-components";
+
+import FilmList from "./FilmList";
 
 
-export default function Person({person}) {
-  // const [person, setPerson] = useState();
-  // let { personId } = useParams();
+const Wrapper = styled.div` text-align:center `;
 
-  // useEffect(() => {
-  //   async function fetchPerson() {
-  //     let res = await fetch(`https://swapi.dev/api/people/${personId}`);
-  //     let data = await res.json();
-  //     setPerson(data)
-  //     console.log('data',data);
-  //   }
+const Item = styled.div`
+  color: #ffb13a;
+  font-size: 25px;
+  padding: 10px;
+  text-align: center;
+  border: 2px solid transparent;
+`;
+
+const Linked = styled.div`
+  margin-bottom: 10px;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid transparent;
+  font-size: 20px;
+
+  &:hover {
+    color: #03a9f4;
+    border-bottom-color: #03a9f4;
+    transition: border-bottom-color .35s ease-in-out, color .35s ease-in-out;
+  }
+  `;
+
+export default function Person() {
+  const [person, setPerson] = useState();
+  let { personId } = useParams();
+
+  useEffect(() => {
+    axios.get(`https://swapi.dev/api/people/${personId}/`).then((res) => {
+
+      setPerson(res.data);
+    });
+  }, [personId, setPerson]);
+
+  if (!person) {
+    return <div>Loading.....</div>;
+  }
 
 
-
-  // }, [setPerson]);
-
-  
 
   return (
-    <div>
-      <Link to="/">Back</Link>
-      <div>name: { person.name }</div>
-      <div>gender: { person.gender }</div>
-      <div>height: { person.height }</div>
-      <div>hair: { person.hair_color }</div>
-    </div>
+    <Wrapper >
+      <Link to="/people">
+        <Linked>Back</Linked>
+      </Link>
+      <Item>name: {person.name}</Item>
+      <Item>gender: {person.gender}</Item>
+      <Item>height: {person.height}</Item>
+      <Item>hair: {person.hair_color}</Item>
+      <FilmList filmLinks={person.films} /> 
+    </Wrapper>
   );
 }
