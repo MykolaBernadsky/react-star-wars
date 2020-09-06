@@ -18,7 +18,9 @@ const Item = styled.div`
   }
 `;
 
-export default function People() {
+const Loading = styled.div`font-size: 25px; color: #fff; `
+
+export default function Films() {
   const [film, setFilms] = useState([]);
   
 
@@ -30,14 +32,15 @@ export default function People() {
       });
   }, [setFilms]);
 
+
+
   const toFilm = useCallback((film, index) => {
     return (
-      <Link to={`/films/${index}`} key={index}>
+      <Link to={`/films/${index+1}`} key={index + 1}>
         <Item>{film.title}</Item>
     </Link>
     )
   });
- 
 
  
   return <div >{film.map(toFilm)}</div>

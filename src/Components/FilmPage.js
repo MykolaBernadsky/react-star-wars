@@ -3,8 +3,6 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import FilmList from "./FilmList";
-
 
 const Wrapper = styled.div` text-align:center `;
 
@@ -30,32 +28,34 @@ const Linked = styled.div`
   }
   `;
 
-export default function Person() {
-  const [person, setPerson] = useState();
-  let { personId } = useParams();
+  const Plot = styled.p`
+    line-heigth: 10px;
+  `
+
+export default function Film() {
+  const [film, setFilm] = useState();
+  let { filmId } = useParams();
 
   useEffect(() => {
-    axios.get(`https://swapi.dev/api/people/${personId}/`).then((res) => {
-
-      setPerson(res.data);
+    axios.get(`https://swapi.dev/api/films/${filmId}/`).then((res) => {
+    
+      setFilm(res.data);
     });
-  }, [personId, setPerson]);
+  }, [filmId, setFilm]);
 
-  if (!person) {
+  if (!film) {
     return <div>Loading.....</div>;
   }
 
 
   return (
     <Wrapper >
-      <Link to="/people">
+      <Link to="/films">
         <Linked>Back</Linked>
       </Link>
-      <Item>name: {person.name}</Item>
-      <Item>gender: {person.gender}</Item>
-      <Item>height: {person.height}</Item>
-      <Item>hair: {person.hair_color}</Item>
-      <FilmList filmLinks={person.films} /> 
+      <Item> <h1>{film.title}</h1></Item>
+      <Item>Episode: {film.episode_id}</Item>
+      <Item><Plot>{film.opening_crawl}</Plot></Item>
     </Wrapper>
   );
 }

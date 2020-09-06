@@ -1,6 +1,7 @@
 import React , {useState, useCallback, useEffect} from 'react'
 import axios from 'axios';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Item = styled.div`
   color: #ffb13a;
@@ -38,8 +39,9 @@ export default function FilmList({ filmLinks }) {
 
   return (
     <div> 
-     Films: {films.map(film => {
-        return <Item>{film.data.title}</Item>
+     Films: {films.map((film, index) => {
+        return (
+          <Link to={`/films/${index+1}`} key={index+1}><Item>{film.data.title}</Item></Link> )
       })}
     </div>
   )
