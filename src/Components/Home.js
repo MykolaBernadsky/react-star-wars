@@ -59,14 +59,10 @@ export default function Home() {
           This is my react app 
         </p>
         <p>
-          With the support of the REPUBLIC, General Leia Organa leads a brave
-          RESISTANCE. She is desperate to find her brother Luke and gain his help
-          in restoring peace and justice to the galaxy.
+          With the support of the REPUBLIC, I create it. Unfortunately, I could not figure out how to set the picture on the background body element, 
+					so I decided to pass it how it's look like
         </p>
-        <p>
-          Leia has sent her most daring pilot on a secret mission to Jakku, where
-          an old ally has discovered a clue to Luke's whereabouts....
-        </p>
+        <p>	I hope you will like my app </p>
       </div>
     </Wrapper>
   )
