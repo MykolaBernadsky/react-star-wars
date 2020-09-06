@@ -8,6 +8,7 @@ import Person from "./Components/Person";
 import Films from "./Components/Films";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
+import FilmPage from './Components/FilmPage';
 
 const Container = styled.div`
   margin: 111px;
@@ -24,7 +25,8 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/people" exact component={People} />
           <Route path="/people/:personId" exact component={Person} />
-          <Route path="/films" component={Films} />
+          <Route path="/films" exact component={Films} />
+          <Route path="/films/:filmId" exact component={FilmPage} />
         </Container>
       </Router>
     </React.Fragment>
