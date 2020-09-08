@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -27,17 +27,19 @@ const Links = styled.div`
 export default function Navbar() {
   return (
     <Menu>
-      <Container>
+      <Container className='navbar'>
         <Link to="/">
-          <Links>Home</Links>
+          <Links className='nav-link'>Home</Links>
         </Link>
         <Link to="/people">
-          <Links>People</Links>{" "}
+          <Links className='nav-link'>People</Links>{" "}
         </Link>
         <Link to="/films">
-          <Links>Films</Links>{" "}
+          <Links className='nav-link'>Films</Links>{" "}
         </Link>
+        
       </Container>
     </Menu>
   );
 }
+
